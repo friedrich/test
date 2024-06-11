@@ -1,6 +1,6 @@
 schemaVersion: 2.2.0
 metadata:
-  # name: sas-devspaces-test
+  # Reusing the same name for a version is buggy. So we set `generatedName` instead of `name`.
   generateName: sas-devspaces-test
   version: 0.0.1
   description: DevSpaces SAS Test
@@ -13,7 +13,7 @@ commands:
         jq '.linkProtectionTrustedDomains |= .+ ["https://azureuse011258.my-trials.sas.com"]' \
             </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
         && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
-  - id: install-sas-extension
+  - id: install-extensions
     exec:
       component: devtools
       commandLine: |
@@ -38,4 +38,4 @@ components:
 events:
   postStart:
     - configure-trusted-domains
-    - install-sas-extension
+    - install-extensions
