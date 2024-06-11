@@ -5,6 +5,7 @@ metadata:
   version: 0.0.1
   description: DevSpaces SAS Test
 
+# command output is logged to /tmp/poststart-stdout.txt and /tmp/poststart-stderr.txt.
 commands:
   - id: configure-trusted-domains
     exec:
@@ -23,6 +24,7 @@ commands:
             --arg itemUrl "https://marketplace.visualstudio.com/items" \
             </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
         && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
+        cat /checode/checode-linux-libc/ubi8/product.json
 
 components:
   - name: devtools
