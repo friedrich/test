@@ -1,0 +1,40 @@
+schemaVersion: 2.2.0
+metadata:
+  name: sas-devspaces-test
+  version: 0.0.1
+  description: DevSpaces SAS Test
+
+commands:
+  - id: configure-trusted-domains
+    exec:
+      component: devtools
+      commandLine: |
+        jq '.linkProtectionTrustedDomains |= .+ ["https://azureuse011258.my-trials.sas.com"]' \
+            </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
+        && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
+  - id: install-sas-extension
+    exec:
+      component: devtools
+      commandLine: |
+        VSCODE_AGENT_FOLDER=/checode/remote /checode/checode-linux-libc/ubi8/bin/che-code --install-extension SAS.sas-lsp || true
+
+components:
+  - name: devtools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-d071837
+      cpuRequest: "1"
+      cpuLimit: "1"
+      memoryRequest: "1Gi"
+      memoryLimit: "1Gi"
+      env:
+        - name: HTTPS_PROXY
+          value: ""
+        - name: HTTP_PROXY
+          value: ""
+        - name: NO_PROXY
+          value: ""
+
+events:
+  postStart:
+    - configure-trusted-domains
+    - install-sas-extension

@@ -1,0 +1,11 @@
+{
+  "SAS.connectionProfiles": {
+    "activeProfile": "default",
+    "profiles": {
+      "default": {
+        "connectionType": "rest",
+        "endpoint": "https://azureuse011258.my-trials.sas.com"
+      }
+    }
+  }
+}
