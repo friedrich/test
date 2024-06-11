@@ -1,6 +1,7 @@
 schemaVersion: 2.2.0
 metadata:
-  name: sas-devspaces-test
+  # name: sas-devspaces-test
+  generateName: sas-devspaces-test
   version: 0.0.1
   description: DevSpaces SAS Test
 
