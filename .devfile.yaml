@@ -14,17 +14,6 @@ commands:
         jq '.linkProtectionTrustedDomains |= .+ ["https://azureuse011258.my-trials.sas.com"]' \
             </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
         && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
-  - id: use-microsoft-marketplace
-    exec:
-      component: devtools
-      commandLine: |
-        jq '.extensionsGallery |= (.serviceUrl = $serviceUrl | .cacheUrl = $cacheUrl | .itemUrl = $itemUrl)' \
-            --arg serviceUrl "https://marketplace.visualstudio.com/_apis/public/gallery" \
-            --arg cacheUrl "https://vscode.blob.core.windows.net/gallery/index" \
-            --arg itemUrl "https://marketplace.visualstudio.com/items" \
-            </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
-        && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
-        cat /checode/checode-linux-libc/ubi8/product.json
 
 components:
   - name: devtools
