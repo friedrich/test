@@ -13,11 +13,16 @@ commands:
         jq '.linkProtectionTrustedDomains |= .+ ["https://azureuse011258.my-trials.sas.com"]' \
             </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
         && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
-  - id: install-extensions
+  - id: use-microsoft-marketplace
     exec:
       component: devtools
       commandLine: |
-        VSCODE_AGENT_FOLDER=/checode/remote /checode/checode-linux-libc/ubi8/bin/che-code --install-extension SAS.sas-lsp || true
+        jq '.extensionsGallery |= (.serviceUrl = $serviceUrl | cacheUrl = $cacheUrl | itemUrl = $itemUrl)' \
+            --arg serviceUrl "https://marketplace.visualstudio.com/_apis/public/gallery" \
+            --arg cacheUrl "https://vscode.blob.core.windows.net/gallery/index" \
+            --arg itemUrl "https://marketplace.visualstudio.com/items" \
+            </checode/checode-linux-libc/ubi8/product.json >/tmp/product.json \
+        && mv /tmp/product.json /checode/checode-linux-libc/ubi8/product.json || true
 
 components:
   - name: devtools
@@ -40,4 +45,4 @@ components:
 events:
   postStart:
     - configure-trusted-domains
-    - install-extensions
+    - use-microsoft-marketplace
