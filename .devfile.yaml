@@ -36,4 +36,3 @@ components:
 events:
   postStart:
     - configure-trusted-domains
-    - use-microsoft-marketplace
