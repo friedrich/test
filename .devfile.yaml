@@ -28,14 +28,14 @@ components:
       memoryRequest: "1Gi"
       memoryLimit: "1Gi"
       env:
+        - name: VSCODE_DEFAULT_WORKSPACE
+          value: .
         - name: HTTPS_PROXY
           value: ""
         - name: HTTP_PROXY
           value: ""
         - name: NO_PROXY
           value: ""
-        - name: VSCODE_DEFAULT_WORKSPACE
-          value: .
 
 events:
   postStart:
